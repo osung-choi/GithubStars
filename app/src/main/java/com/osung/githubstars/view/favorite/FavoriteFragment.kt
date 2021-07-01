@@ -9,15 +9,12 @@ import com.osung.githubstars.databinding.FavoriteFragmentBinding
 import com.osung.githubstars.repository.entity.User
 import com.osung.githubstars.view.adapter.OnUserItemClickListener
 import com.osung.githubstars.view.adapter.UserAdapter
-import com.osung.githubstars.view.main.MainViewModel
 import com.osung.githubstars.view.utils.KeyboardUtil
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment(), OnUserItemClickListener {
     private lateinit var binding: FavoriteFragmentBinding
     private val viewModel: FavoriteViewModel by viewModel()
-    private val parentViewModel: MainViewModel by sharedViewModel() //Activity ViewModel
 
     private val adapter by lazy { UserAdapter(this) }
 
@@ -37,15 +34,12 @@ class FavoriteFragment : Fragment(), OnUserItemClickListener {
 
         binding.searchFavoriteList.adapter = adapter
 
-        //액티비티 뷰모델의 즐겨찾기 목록을 관찰하여 자신의 뷰모델에게 전달.
-        parentViewModel.favoriteUserAllList.observe(viewLifecycleOwner, {
-            viewModel.refreshFavoriteUserList(it)
-        })
 
         //키보드 감추기 및 EditText 포커스 제거
         viewModel.keyboardHide.observe(viewLifecycleOwner, {
             KeyboardUtil.hideKeyboard(requireContext(), binding.inputFilterFavorite)
         })
+
     }
 
     /**
@@ -57,7 +51,7 @@ class FavoriteFragment : Fragment(), OnUserItemClickListener {
      */
     override fun setFavoriteStateChange(user: User) {
         if(user.isFavorite) {
-            parentViewModel.deleteFavoriteUser(user)
+            viewModel.deleteFavoriteUser(user)
         }
     }
 

@@ -13,6 +13,10 @@ class LocalFavoriteDataSourceImpl(
         return database.favoriteDao().selectFavoriteUserAllList()
     }
 
+    override fun selectFavoriteUserList(query: String): LiveData<List<FavoriteUserObject>> {
+        return database.favoriteDao().selectFavoriteUserList("%$query%")
+    }
+
     override fun insertFavoriteUser(user: FavoriteUserObject): Completable {
         return database.favoriteDao().insertFavoriteUser(user)
     }

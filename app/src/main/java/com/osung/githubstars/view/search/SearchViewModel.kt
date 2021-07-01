@@ -18,7 +18,7 @@ class SearchViewModel(
     private val compositeDisposable = CompositeDisposable()
 
     private val _searchUserList = MutableLiveData<List<User>>() //UserName 검색 결과 관찰자
-    private val _favoriteUserAllList = MutableLiveData<List<User>>() //즐겨찾기 전체 목록 관찰자
+    private val _favoriteUserAllList = repository.selectFavoriteUserAllList() //즐겨찾기 전체 목록 관찰자
 
     //UserName 검색 결과 관찰자, 즐겨찾기 전체 목록 관찰자 결합. (이벤트에 따라 데이터 갱신)
     val searchUserList: LiveData<List<User>> = MediatorLiveData<List<User>>().apply {
@@ -49,12 +49,29 @@ class SearchViewModel(
     }
 
     /**
-     * 즐겨찾기 전체 목록 갱신
+     * 즐겨찾기 등록
      *
-     * @param favoriteUsers 즐겨찾기 전체 목록
+     * @param user 등록할 유저 데이터
      */
-    fun refreshFavoriteUserAllList(favoriteUsers: List<User>) {
-        _favoriteUserAllList.value = favoriteUsers //액티비티 뷰모델에서 전달.
+    fun insertFavoriteUser(user: User) {
+        repository.insertFavoriteUser(user)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .run { compositeDisposable.add(this) }
+    }
+
+    /**
+     * 즐겨찾기 삭제
+     *
+     * @param user 삭제할 유저 데이터
+     */
+    fun deleteFavoriteUser(user: User) {
+        repository.deleteFavoriteUser(user)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .run { compositeDisposable.add(this) }
     }
 
     /**

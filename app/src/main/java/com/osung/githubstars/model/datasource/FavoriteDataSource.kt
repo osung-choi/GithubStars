@@ -13,6 +13,14 @@ interface FavoriteDataSource {
     fun selectFavoriteUserAllList() : LiveData<List<FavoriteUserObject>>
 
     /**
+     * 즐겨찾기 목록 조회
+     *
+     * @param query 검색어
+     * @return
+     */
+    fun selectFavoriteUserList(query: String) : LiveData<List<FavoriteUserObject>>
+
+    /**
      * 즐겨찾기 추가
      *
      * @param user 추가할 데이터

@@ -10,6 +10,9 @@ interface FavoriteDao {
     @Query("SELECT * FROM FavoriteUserObject ORDER BY login")
     fun selectFavoriteUserAllList() : LiveData<List<FavoriteUserObject>>
 
+    @Query("SELECT * FROM FavoriteUserObject WHERE login LIKE :query ORDER BY login")
+    fun selectFavoriteUserList(query: String) : LiveData<List<FavoriteUserObject>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavoriteUser(user: FavoriteUserObject) : Completable
 
