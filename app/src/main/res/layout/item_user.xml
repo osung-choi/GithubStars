@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="userData"
+            type="com.osung.githubstars.view.adapter.UserDataList.UserData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/userProfile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:setUserProfileImage="@{userData.user.avatarUrl}"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="@{userData.user.login}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/userProfile"
+            app:layout_constraintEnd_toStartOf="@id/userFavorite"
+            tools:text="osung" />
+
+        <ImageView
+            android:id="@+id/userFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/selector_btn_favorite"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:selected="@{userData.user.isFavorite}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

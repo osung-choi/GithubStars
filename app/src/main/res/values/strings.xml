@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GithubStars</string>
+    
+    <string name="page_1">API</string>
+    <string name="page_2">로컬</string>
+
+    <string name="string_edit_search_query">검색어를 입력하세요.</string>
+</resources>
