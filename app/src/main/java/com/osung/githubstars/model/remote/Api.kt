@@ -1,4 +1,4 @@
-package com.osung.githubstars
+package com.osung.githubstars.model.remote
 
 import com.osung.githubstars.model.remote.data.ResponseSearchUser
 import io.reactivex.rxjava3.core.Single

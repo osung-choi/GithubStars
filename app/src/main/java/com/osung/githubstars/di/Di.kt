@@ -1,6 +1,6 @@
 package com.osung.githubstars.di
 
-import com.osung.githubstars.Api
+import com.osung.githubstars.model.remote.Api
 import com.osung.githubstars.model.datasource.FavoriteDataSource
 import com.osung.githubstars.model.datasource.SearchDataSource
 import com.osung.githubstars.model.local.LocalFavoriteDataSourceImpl
