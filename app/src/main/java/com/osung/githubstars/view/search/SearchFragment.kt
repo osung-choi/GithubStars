@@ -39,9 +39,9 @@ class SearchFragment : Fragment(), OnUserItemClickListener {
         binding.searchApiList.layoutManager = LinearLayoutManager(requireContext())
 
         //키보드 감추기 및 EditText 포커스 제거
-        viewModel.keyboardHide.observe(viewLifecycleOwner, {
+        viewModel.keyboardHide.observe(viewLifecycleOwner) {
             KeyboardUtil.hideKeyboard(requireContext(), binding.inputSearchQuery)
-        })
+        }
     }
 
     companion object {

@@ -6,12 +6,27 @@ import io.reactivex.rxjava3.core.Completable
 
 interface FavoriteRepository {
     /**
+     * 즐겨찾기 전체 목록 조회
+     *
+     * @return 전체 목록 관찰자
+     */
+    fun selectFavoriteUserAllList() : LiveData<List<User>>
+
+    /**
      * 즐겨찾기 목록 조회
      *
      * @param query 검색어
      * @return
      */
     fun selectFavoriteUserList(query: String) : LiveData<List<User>>
+
+    /**
+     * 즐겨찾기 추가
+     *
+     * @param user 추가할 유저 데이터
+     * @return
+     */
+    fun insertFavoriteUser(user: User): Completable
 
     /**
      * 즐겨찾기 삭제

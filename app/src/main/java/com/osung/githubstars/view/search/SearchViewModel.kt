@@ -1,6 +1,7 @@
 package com.osung.githubstars.view.search
 
 import androidx.lifecycle.*
+import com.osung.githubstars.repository.FavoriteRepository
 import com.osung.githubstars.repository.SearchRepository
 import com.osung.githubstars.repository.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,16 +13,17 @@ import javax.inject.Inject
 /**
  * Api 검색 및 즐겨찾기 여부 검사
  *
- * @property repository
+ * @property searchRepository
  */
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repository: SearchRepository //검색 관련 Repository
+    private val searchRepository: SearchRepository, //검색 관련 Repository
+    private val favoriteRepository: FavoriteRepository
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     private val _searchUserList = MutableLiveData<List<User>>() //UserName 검색 결과 관찰자
-    private val _favoriteUserAllList = repository.selectFavoriteUserAllList() //즐겨찾기 전체 목록 관찰자
+    private val _favoriteUserAllList = favoriteRepository.selectFavoriteUserAllList() //즐겨찾기 전체 목록 관찰자
 
     //UserName 검색 결과 관찰자, 즐겨찾기 전체 목록 관찰자 결합. (이벤트에 따라 데이터 갱신)
     val searchUserList: LiveData<List<User>> = MediatorLiveData<List<User>>().apply {
@@ -41,7 +43,7 @@ class SearchViewModel @Inject constructor(
      */
     fun btnSearchClick(query: String) {
         if(query.isNotBlank()) {
-            repository.searchUserName(query)
+            searchRepository.searchUserName(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
@@ -57,7 +59,7 @@ class SearchViewModel @Inject constructor(
      * @param user 등록할 유저 데이터
      */
     fun insertFavoriteUser(user: User) {
-        repository.insertFavoriteUser(user)
+        favoriteRepository.insertFavoriteUser(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
@@ -70,7 +72,7 @@ class SearchViewModel @Inject constructor(
      * @param user 삭제할 유저 데이터
      */
     fun deleteFavoriteUser(user: User) {
-        repository.deleteFavoriteUser(user)
+        favoriteRepository.deleteFavoriteUser(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
