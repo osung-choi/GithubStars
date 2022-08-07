@@ -41,16 +41,12 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
-        Interceptor { chain ->
-            chain.proceed(chain.request().newBuilder().apply {
-                header("accept", "application/vnd.github.v3+json")
-            }.build())
-        }
-    }
-
-    single {
         OkHttpClient.Builder().apply {
-            addInterceptor(get())
+            addInterceptor(Interceptor { chain ->
+                chain.proceed(chain.request().newBuilder().apply {
+                    header("accept", "application/vnd.github.v3+json")
+                }.build())
+            })
             addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
