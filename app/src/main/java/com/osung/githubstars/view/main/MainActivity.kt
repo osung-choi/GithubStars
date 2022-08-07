@@ -11,8 +11,9 @@ import com.osung.githubstars.R
 import com.osung.githubstars.databinding.ActivityMainBinding
 import com.osung.githubstars.view.favorite.FavoriteFragment
 import com.osung.githubstars.view.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding

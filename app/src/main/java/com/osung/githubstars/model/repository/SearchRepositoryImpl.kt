@@ -9,8 +9,9 @@ import com.osung.githubstars.repository.entity.User
 import com.osung.githubstars.repository.entity.mapper
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class SearchRepositoryImpl(
+class SearchRepositoryImpl @Inject constructor(
     private val remote: SearchDataSource, //Remote 에서 유저 검색 접근
     private val local: FavoriteDataSource //Local 에서 즐겨찾기 데이터 접근
 ): SearchRepository {

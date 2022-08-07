@@ -7,8 +7,9 @@ import com.osung.githubstars.repository.FavoriteRepository
 import com.osung.githubstars.repository.entity.User
 import com.osung.githubstars.repository.entity.mapper
 import io.reactivex.rxjava3.core.Completable
+import javax.inject.Inject
 
-class FavoriteRepositoryImpl(
+class FavoriteRepositoryImpl @Inject constructor(
     private val local: FavoriteDataSource //Local 에서 즐겨찾기 데이터 접근
 ): FavoriteRepository {
     override fun selectFavoriteUserList(query: String): LiveData<List<User>> {

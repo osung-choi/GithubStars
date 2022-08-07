@@ -3,11 +3,14 @@ package com.osung.githubstars.view.favorite
 import androidx.lifecycle.*
 import com.osung.githubstars.repository.FavoriteRepository
 import com.osung.githubstars.repository.entity.User
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class FavoriteViewModel(
+@HiltViewModel
+class FavoriteViewModel @Inject constructor(
     private val repository: FavoriteRepository
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

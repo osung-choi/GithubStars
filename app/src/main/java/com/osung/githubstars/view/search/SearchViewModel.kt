@@ -3,16 +3,19 @@ package com.osung.githubstars.view.search
 import androidx.lifecycle.*
 import com.osung.githubstars.repository.SearchRepository
 import com.osung.githubstars.repository.entity.User
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Api 검색 및 즐겨찾기 여부 검사
  *
  * @property repository
  */
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val repository: SearchRepository //검색 관련 Repository
 ) : ViewModel() {
     private val compositeDisposable = CompositeDisposable()

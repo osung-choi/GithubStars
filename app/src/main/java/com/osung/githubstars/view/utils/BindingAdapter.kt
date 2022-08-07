@@ -11,7 +11,7 @@ import com.osung.githubstars.view.adapter.UserAdapter
 
 object BindingAdapter {
     @JvmStatic
-    @BindingAdapter("app:setUserItems")
+    @BindingAdapter("setUserItems")
     fun setUserItems(recyclerView: RecyclerView, user: List<User>?) {
         user?.let {
             (recyclerView.adapter as? UserAdapter)?.submitHeaderList(it)
@@ -20,7 +20,7 @@ object BindingAdapter {
 
 
     @JvmStatic
-    @BindingAdapter("app:setUserProfileImage")
+    @BindingAdapter("setUserProfileImage")
     fun setUserProfileImage(imageView: ImageView, profileUrl: String?) {
         profileUrl?.let {
             Glide.with(imageView)
@@ -31,7 +31,7 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:onEditorSearchActionListener")
+    @BindingAdapter("onEditorSearchActionListener")
     fun setOnEditorSearchActionListener(editText: EditText, listener: () -> Unit) {
         editText.setOnEditorActionListener { _, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH) {

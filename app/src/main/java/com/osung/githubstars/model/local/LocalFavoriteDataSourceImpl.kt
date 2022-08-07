@@ -5,8 +5,9 @@ import com.osung.githubstars.model.datasource.FavoriteDataSource
 import com.osung.githubstars.model.local.data.FavoriteUserObject
 import com.osung.githubstars.model.local.database.AppDatabase
 import io.reactivex.rxjava3.core.Completable
+import javax.inject.Inject
 
-class LocalFavoriteDataSourceImpl(
+class LocalFavoriteDataSourceImpl @Inject constructor(
     private val database: AppDatabase
 ): FavoriteDataSource {
     override fun selectFavoriteUserAllList(): LiveData<List<FavoriteUserObject>> {

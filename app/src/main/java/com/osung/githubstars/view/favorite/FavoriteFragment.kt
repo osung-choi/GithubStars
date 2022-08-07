@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.osung.githubstars.databinding.FavoriteFragmentBinding
 import com.osung.githubstars.repository.entity.User
 import com.osung.githubstars.view.adapter.OnUserItemClickListener
 import com.osung.githubstars.view.adapter.UserAdapter
 import com.osung.githubstars.view.utils.KeyboardUtil
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment(), OnUserItemClickListener {
     private lateinit var binding: FavoriteFragmentBinding
-    private val viewModel: FavoriteViewModel by viewModel()
+    private val viewModel: FavoriteViewModel by viewModels()
 
     private val adapter by lazy { UserAdapter(this) }
 
